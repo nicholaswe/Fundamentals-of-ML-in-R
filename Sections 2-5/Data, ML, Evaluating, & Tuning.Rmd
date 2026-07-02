@@ -108,6 +108,12 @@ Great!  Now, it's worth sanity checking that we did that right.
 head(train_data_caret)
 head(test_data_caret)
 ```
+Response variable is missing, we need to get it back.
+
+```{r Restore response variable}
+train_data_caret$churn <- train_data$churn
+test_data_caret$churn <- test_data$churn
+```
 
 Looks good!   We've successfully imputed missing data, performed one-hot encoding, and standardized our training and test sets.  Now, let's see how we would do this with Tidymodels.
 
