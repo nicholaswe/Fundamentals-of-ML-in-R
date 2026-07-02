@@ -108,6 +108,12 @@ Great!  Now, it's worth sanity checking that we did that right.
 head(train_data_caret)
 head(test_data_caret)
 ```
+Response variable is missing, we need to get it back.
+
+```{r Restore response variable}
+train_data_caret$churn <- train_data$churn
+test_data_caret$churn <- test_data$churn
+```
 
 Looks good!   We've successfully imputed missing data, performed one-hot encoding, and standardized our training and test sets.  Now, let's see how we would do this with Tidymodels.
 
@@ -120,8 +126,9 @@ With Tidymodels, the process is a little more streamlined.  Essentially, we defi
 churn_recipe <- recipe(churn ~ ., data=train_data) %>%
   step_impute_knn(all_numeric_predictors()) %>%  # impute missing values
   step_dummy(all_nominal_predictors()) %>%  # one-hot encoding
-  step_scale(all_numeric_predictors()) %>%  # standardization
-  step_center(all_numeric_predictors())
+  # step_scale(all_numeric_predictors()) %>%  # standardization
+  # step_center(all_numeric_predictors())
+  step_normalize(all_numeric_predictors()) # combines scale+center
 ```
 
 Great.  We've defined the recipe.  Now, we need to prepare it, and "bake it" - aka, apply it to the training data, followed by the testing data.
