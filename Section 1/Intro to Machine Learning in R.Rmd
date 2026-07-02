@@ -14,7 +14,7 @@ While it will be helpful for the participant to have some rudimentary experience
 ### Machine Learning Overview ###
 
 ```{r Load libraries and data}
-# install.packages('modeldata')
+# renv::install('modeldata')
 library(modeldata)
 
 data(wa_churn)
@@ -56,8 +56,8 @@ A question many beginner and intermediate practitioners of data science and mach
 In this sub-section, we will introduce the major two "packages" we will be covering in this course: Caret and Tidymodels.
 
 ```{r Load libraries}
-#install.packages('caret')
-#install.packages('tidymodels')
+#renv::install('caret')
+#renv::install('tidymodels')
 library(caret)
 library(tidymodels)
 ```
