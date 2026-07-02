@@ -126,8 +126,9 @@ With Tidymodels, the process is a little more streamlined.  Essentially, we defi
 churn_recipe <- recipe(churn ~ ., data=train_data) %>%
   step_impute_knn(all_numeric_predictors()) %>%  # impute missing values
   step_dummy(all_nominal_predictors()) %>%  # one-hot encoding
-  step_scale(all_numeric_predictors()) %>%  # standardization
-  step_center(all_numeric_predictors())
+  # step_scale(all_numeric_predictors()) %>%  # standardization
+  # step_center(all_numeric_predictors())
+  step_normalize(all_numeric_predictors()) # combines scale+center
 ```
 
 Great.  We've defined the recipe.  Now, we need to prepare it, and "bake it" - aka, apply it to the training data, followed by the testing data.
